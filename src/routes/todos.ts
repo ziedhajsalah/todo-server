@@ -7,8 +7,8 @@ import {
 } from "../db";
 
 export async function createTodoRoute(req: Request, res: Response) {
-  console.log(req.body);
-  const todo = await createTodo(req.body.title, 1);
+  const userId = res.locals.userId;
+  const todo = await createTodo(req.body.title, userId);
   res.json(todo);
 }
 
@@ -31,7 +31,8 @@ export async function deleteTodoRoute(req: Request, res: Response) {
 }
 
 export async function listTodosRoute(req: Request, res: Response) {
-  const todos = await getTodosByUserId(1);
+  const userId = res.locals.userId;
+  const todos = await getTodosByUserId(userId);
 
   res.json(todos);
 }

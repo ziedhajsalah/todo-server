@@ -1,15 +1,25 @@
-import { PrismaClient, User } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+import { hash } from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-export async function createUser(userToCreate: Omit<User, "id">) {
-  const user = await prisma.user.create({ data: userToCreate });
+export async function createUser(email: string, password: string) {
+  const passwordHash = await hash(password, 10);
+  const user = await prisma.user.create({
+    data: { email, password: passwordHash },
+  });
 
   return user;
 }
 
-export async function getUserById(id: number) {
-  const user = await prisma.user.findUnique({ where: { id } });
+export async function getUserByEmail(email: string) {
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  return user;
+}
+
+export async function getUserById(userId: number) {
+  const user = await prisma.user.findUnique({ where: { id: userId } });
 
   return user;
 }
