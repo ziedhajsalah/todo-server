@@ -18,7 +18,7 @@ export async function markTodoCompleted(req: Request, res: Response) {
   res.json(todo);
 }
 
-export async function markTodoUnCompleted(req: Request, res: Response) {
+export async function markTodoincompleted(req: Request, res: Response) {
   const todo = await checkUncheckTodo(parseInt(req.params.todoId, 10), false);
 
   res.json(todo);

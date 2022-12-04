@@ -6,7 +6,7 @@ import {
   loginRoute,
   createTodoRoute,
   markTodoCompleted,
-  markTodoUnCompleted,
+  markTodoincompleted,
   deleteTodoRoute,
   listTodosRoute,
 } from "./src/routes";
@@ -31,7 +31,7 @@ app.post("/login", loginRoute);
 app.get("/todos", authenticateToken, listTodosRoute);
 app.post("/todos", authenticateToken, createTodoRoute);
 app.put("/todos/:todoId/complete", authenticateToken, markTodoCompleted);
-app.put("/todos/:todoId/uncomplete", authenticateToken, markTodoUnCompleted);
+app.put("/todos/:todoId/incomplete", authenticateToken, markTodoincompleted);
 app.delete("/todos/:todoId", authenticateToken, deleteTodoRoute);
 
 app.listen(port, () => {
